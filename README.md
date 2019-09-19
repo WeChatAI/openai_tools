@@ -9,4 +9,4 @@ python calculateAccuracy.py \<APPID> \<TOKEN> \<EncodingAESKey> \<InputFile>
 
 **参数**
 1. APPID，TOKEN，EncodingAESKey可从平台申请获取（机器人设置->服务接入->其他接入方式->开放接口申请）；
-2. InputFile：测试文件，多行，每行由一条用户query和其应命中的意图组成，二者用TAB字符隔开。
+2. InputFile：测试文件，多行，每行由一条用户query和其应命中的意图组成，二者用TAB字符隔开。参考sampleInput1。
