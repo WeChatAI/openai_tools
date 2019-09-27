@@ -2,8 +2,8 @@ import jwt
 import sys
 import requests
 
-if len(sys.argv) != 5:
-    print "Usage: python calculateAccuracy.py <APPID> <TOKEN> <EncodingAESKey> <InputFile>"
+if len(sys.argv) != 6:
+    print "Usage: python calculateAccuracy.py <APPID> <TOKEN> <EncodingAESKey> <InputFile> <OutputFile>"
     exit()
 
 APPID = sys.argv[1]
@@ -11,6 +11,8 @@ TOKEN = sys.argv[2]
 EncodingAESKey = sys.argv[3]
 
 fin = open(sys.argv[4], 'r')
+fout = open(sys.argv[5], 'w')
+fout.write("query\texpected_intent\tintent_from_openai\n")
 
 correct_count = 0; total_count = 0
 for line in fin.readlines():
@@ -34,4 +36,9 @@ for line in fin.readlines():
         correct_count += 1
     total_count += 1
 
-print "accuracy:", float(correct_count)/total_count
+    fout.write(line.strip()+'\t'+response["title"].encode('utf8')+'\n')
+
+fout.write("total accuracy: %f" % (float(correct_count)/total_count))
+
+fin.close()
+fout.close()
