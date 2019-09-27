@@ -25,6 +25,10 @@ for line in fin.readlines():
 
     # extract returned intent
     response = r.json()
+    if "title" not in response:
+        print "Failed: there are errors in APPID/TOKEN/EncodingAESKey."
+        exit()
+
     test_intent = response["title"]
     if ground_truth_intent == test_intent.encode('utf8'):
         correct_count += 1
